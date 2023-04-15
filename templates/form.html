@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <title>Centered Box with Two Boxes Inside</title>
+   <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+   <div class="outer-box">
+      <div class="inner-box input-container">
+         <form action="{{ url_for('add') }}" method="post">
+            <input type="text" placeholder="Enter your task" name="task">
+            <button type="submit">Add</button>
+         </form>
+      </div>
+      <div class="inner-box">
+         <div class="button-list">
+            {% for task in tasks %}
+            <form action="{{ url_for('open') }}" method="post">
+               <button type="submit" name="task_id" value="{{task.id}}">{{task.name}}</button>
+            </form>
+            {% endfor %}
+         </div>
+      </div>
+   </div>
+</body>
+
+</html>
+
+
+function start_counter() {
+counter = document.getElementById('counter');
+start_button = document.getElementById('start')
+if (start_button.innerText == 'Start') {
+start_button.innerText = 'Pause';
+timer_id = setInterval(function () {
+if (parseInt(counter.innerText) > 0) {
+counter.innerText = parseInt(counter.innerText) - 1;
+}
+}, 1000);
+}
+else {
+// window.location.href = apiUrl;
+start_button.innerText = 'Start';
+clearInterval(timer_id);
+}
+}

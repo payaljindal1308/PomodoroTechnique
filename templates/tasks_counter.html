@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/styles.css') }}">
+    <title>Pomodoro</title>
+    <script type="text/javascript">
+        timer_id = 0
+        let counter
+        function start_counter(seconds, minutes) {
+            counter = document.getElementById('counter');
+            start_button = document.getElementById('start')
+            if (start_button.innerText == 'Start') {
+                start_button.innerText = 'Pause';
+                time = counter.innerText.split(':');
+                sec = parseInt(time[1]);
+                min = parseInt(time[0]);
+                if (counter.innerText != '00:00') {
+                    timer_id = setInterval(function () {
+                        if (sec == 0) {
+                            sec = 59;
+                            min = min - 1;
+                        }
+                        else {
+                            sec = sec - 1;
+                        }
+                        document.getElementById("counter").textContent = (min < 10 ? "0" + min : min) + ":" + (sec < 10 ? "0" + sec : sec);
+                    }, 1000);
+                }
+
+            }
+            else {
+                start_button.innerText = 'Start';
+                clearInterval(timer_id);
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="outer-box">
+        <div class="inner-box input-container">
+            <h1 class="other-heading">{{task.name}}</h1>
+            <h1 class="other-heading"><span id="counter">{{counter}}</span></h1>
+            <button id="start" class="button" onclick="start_counter()">Start</button>
+        </div>
+        <div class="inner-box">
+            <div class="button-list">
+                {% for task in tasks %}
+                <form method="post" action="{{ url_for('open') }}">
+                    <button class="task-button" type="submit" name="open" value="{{task.id}}">{{task.name}}</button>
+                    <button class="del-button" type="submit" name="delete" value="{{task.id}}">-</button>
+                </form>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

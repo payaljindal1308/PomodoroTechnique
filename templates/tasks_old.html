@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            width: 300px;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            background-color: darkcyan;
+            color: #fff;
+            border-radius: 50px;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Hover state */
+        .button:hover {
+            background-color: darkcyan;
+        }
+
+    </style>
+    <!-- <style>
+        body {
+            background-color: rgb(183, 73, 73);
+        }
+
+        h2 {
+            color: white;
+            /* Fallback for older browsers */
+            color: rgba (0, 0, 0, 0.5);
+            font-size: 16pt;
+            font-family: Arial, sans-serif;
+        }
+
+        .div_heading {
+            align-self: center;
+            text-align: center;
+            width: 300px;
+            border-style: dotted;
+            border-color: white;
+        }
+
+    </style> -->
+    <title>Tasks</title>
+</head>
+
+<body>
+    <div>
+        <h2>Pomodoro</h2>
+    </div>
+    <br>
+    <div style="background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 6px;
+        margin-bottom: 20px;
+        width: 100%;
+        display: flex; flex-direction: column">
+        <div class="div_tasks">
+            <form action="{{ url_for('add') }}" method="post">
+                <div class="input-group">
+                    <input class="button" type="text" class="form-control" name="task">
+                    <button class="button" type="submit">Add Task</button>
+                </div>
+            </form>
+        </div>
+        <div>
+            {% for task in tasks %}
+            <form action="{{ url_for('open') }}" method="post">
+                <ul style="list-style-type: none">
+                    <li> <button class="button" type="submit" name="task_id" value="{{task.id}}">{{task.name}}</button>
+                    </li>
+                </ul>
+            </form>
+            {% endfor %}
+        </div>
+        <!DOCTYPE html>
+
+    </div>
+</body>
+
+</html>

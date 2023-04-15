@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Pomodoro</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/styles.css') }}">
+</head>
+
+<body>
+    <div class="outer-box">
+        <div>
+            <i></i>
+            <h1 class="box-heading">Pomodoro</h1>
+        </div>
+
+        <div class="inner-box input-container">
+            <form action="{{ url_for('add') }}" method="post">
+                <input type="text" placeholder="Enter your task" name="task">
+                <button class="button" type="submit">Add</button>
+            </form>
+        </div>
+        <div class="inner-box">
+            <div class="button-list">
+                {% for task in tasks %}
+                <form method="post" action="{{ url_for('open') }}">
+                    <button class="task-button" type="submit" name="open" value="{{task.id}}">{{task.name}}</button>
+                    <button class="del-button" type="submit" name="delete" value="{{task.id}}">-</button>
+                </form>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
